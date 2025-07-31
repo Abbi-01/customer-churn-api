@@ -1,116 +1,51 @@
 # customer-churn-api
 
-A machine learning app to predict the probability of customer churn using a pre-trained model. Available via REST API and batch processing.
+A machine learning application that predicts customer churn probability using a pre-trained model, available both as a REST API endpoint and a batch processing script.
 
-Overview
+## Overview
 
-This project helps predict if a customer will leave a service using:
+This project provides a solution for predicting whether customers are likely to churn based on various customer attributes. The system includes:
 
-A Flask REST API for real-time predictions
+- Flask-based REST API for real-time predictions
+- Batch processing script for scoring multiple customers
+- Pre-trained machine learning model and data transformer
+- Logging capabilities for monitoring performance
 
-A batch script to handle multiple customers
+## Installation
 
-Pre-trained model and transformer
+1. Clone the repository and navigate to the project directory
+2. Create a virtual environment: `python -m venv venv`
+3. Activate it: `source venv/bin/activate`
+4. Install dependencies: `pip install -r requirements.txt`
 
-Logs to monitor processing
+## Usage
 
-Folder Structure
-bash
-Copy
-Edit
-customer-churn-api/
-├── app/               # API code & model
-├── logs/              # Logs from batch runs
-├── test_data/         # Sample input files
-├── batch.py           # Batch prediction script
-├── requirements.txt   # Required packages
-├── scored_customers.csv
-└── README.md
-
-Setup
-
-Clone the repo:
-
-bash
-Copy
-Edit
-git clone [repository-url]
-cd customer-churn-api
-Create a virtual environment:
-
-bash
-Copy
-Edit
-python -m venv venv
-source venv/bin/activate  # or venv\Scripts\activate (Windows)
-Install dependencies:
-
-bash
-Copy
-Edit
-pip install -r requirements.txt
-How to Use
-API (Real-time Prediction)
-Run the API:
-
-bash
-Copy
-Edit
+### REST API
+```bash
 cd app
 python main.py
-API URL: http://localhost:8000/predict
+```
+API available at `http://localhost:8000/predict`
 
-Send POST request with customer data:
-
-bash
-Copy
-Edit
+Send POST requests with customer data:
+```bash
 curl -X POST http://localhost:8000/predict \
   -H "Content-Type: application/json" \
   -d @test_data/sample_input.json
-Response:
+```
 
-json
-Copy
-Edit
-{
-  "churn_probability": 0.72,
-  "churn_prediction": "Yes"
-}
-Batch Mode
-Run batch predictions:
-
-bash
-Copy
-Edit
+### Batch Processing
+```bash
 python batch.py --input test_data/all_customers.csv
-Results saved in scored_customers.csv
-Logs saved in logs/batch_log.txt
+```
+Results saved to `scored_customers.csv`
 
-Input Format
-Sample JSON input:
+## Requirements
 
-json
-Copy
-Edit
-{
-  "customer": {
-    "gender": "Female",
-    "SeniorCitizen": 0,
-    ...
-    "MonthlyCharges": 29.85
-  }
-}
-Model Info
-Model: model.pkl
+- Python 3.6+
+- Flask, pandas, scikit-learn
+- Additional dependencies in `requirements.txt`
 
-Transformer: transformer.pkl
+## Contributors
 
-Threshold: 0.5 for Yes/No
-
-Notes
-Use Python 3.6+
-
-Troubleshoot using logs/batch_log.txt
-
-Make sure input format matches the example
+Made with ❤️ by Abhishek.
